@@ -1,5 +1,5 @@
 #pragma once
-#include "logintransfer.h"
+#include "loginmanager.h"
 
 extern loginTransfer mainTransfer;
 

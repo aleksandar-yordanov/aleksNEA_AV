@@ -1,18 +1,29 @@
-
 #pragma once
 #include "includes.h"
 
-namespace net{
-class StringRequest{
-    std::string HTMLRequestString;
-    std::string ipAddress;
-public:
-    StringRequest(int method, std::string resource, std::string ipAddress,std::string json);
+namespace net
+{
+    enum class method
+    {
+        METHOD_GET,
+        METHOD_POST,
+        METHOD_PUT,
+        METHOD_HEAD,
+        METHOD_DELETE,
+        METHOD_TRACE,
+        METHOD_CONNECT,
+        METHOD_OPTIONS
+    };
 
-    operator std::string() const;
+    class StringRequest{
+        std::string HTMLRequestString;
+        std::string ipAddress;
+    public:
+        StringRequest(net::method method, std::string resource, std::string ipAddress,std::string json);
 
-    std::string returnString();
-    std::string returnIpAddress();
-};
+        operator std::string() const;
+
+        std::string returnString();
+        std::string returnIpAddress();
+    };
 }
-

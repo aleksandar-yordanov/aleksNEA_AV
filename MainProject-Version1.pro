@@ -20,27 +20,38 @@ LIBS += \
     -L"/Users/aleks/Downloads/SQLAPI/lib" -lSQLAPI
 
 SOURCES += \
+    accountwindow.cpp \
     common.cpp \
+    errorbox.cpp \
     httprequest.cpp \
-    logintransfer.cpp \
+    license.cpp \
+    loginmanager.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp \
     resetwindow.cpp \
-    stringrequest.cpp
+    statsmanager.cpp \
+    stringrequest.cpp \
+    threattype.cpp
 
 HEADERS += \
+    accountwindow.h \
     common.h \
+    errorbox.h \
     httprequest.h \
     includes.h \
-    logintransfer.h \
+    license.h \
+    loginmanager.h \
     loginwindow.h \
     mainInherited.h \
     mainwindow.h \
     resetwindow.h \
-    stringrequest.h
+    statsmanager.h \
+    stringrequest.h \
+    threattype.h
 
 FORMS += \
+    accountwindow.ui \
     loginwindow.ui \
     mainwindow.ui \
     resetwindow.ui

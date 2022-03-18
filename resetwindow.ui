@@ -35,11 +35,11 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="gui_resetTab">
     <attribute name="title">
-     <string>Reset Password</string>
+     <string>Change Password</string>
     </attribute>
     <widget class="QWidget" name="formLayoutWidget">
      <property name="geometry">
@@ -82,6 +82,9 @@
 
 </string>
         </property>
+        <property name="maxLength">
+         <number>255</number>
+        </property>
        </widget>
       </item>
       <item row="1" column="1">
@@ -108,16 +111,22 @@
 
 </string>
         </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="gui_resetPasswordLabel">
-        <property name="text">
-         <string>Password:</string>
+        <property name="maxLength">
+         <number>64</number>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="3" column="0">
+       <widget class="QLabel" name="gui_resetPasswordLabel">
+        <property name="text">
+         <string>Original:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
        <widget class="QLineEdit" name="gui_resetPasswordInput">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -141,16 +150,22 @@
 
 </string>
         </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="gui_resetConfirmLabel">
-        <property name="text">
-         <string>Confirm:</string>
+        <property name="maxLength">
+         <number>64</number>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="1" column="0">
+       <widget class="QLabel" name="gui_resetEmailLabel">
+        <property name="text">
+         <string>New pass:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
        <widget class="QLineEdit" name="gui_resetConfirmInput">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -174,12 +189,18 @@
 
 </string>
         </property>
+        <property name="maxLength">
+         <number>64</number>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="gui_resetEmailLabel">
+      <item row="2" column="0">
+       <widget class="QLabel" name="gui_resetConfirmLabel">
         <property name="text">
-         <string>Email:</string>
+         <string>Confirm:</string>
         </property>
        </widget>
       </item>
@@ -195,7 +216,23 @@
       </rect>
      </property>
      <property name="text">
-      <string>Reset Password</string>
+      <string>Change Password</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="gui_resetWarningLabel">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>160</y>
+       <width>321</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -244,6 +281,9 @@
 
 </string>
         </property>
+        <property name="maxLength">
+         <number>255</number>
+        </property>
        </widget>
       </item>
       <item row="1" column="1">
@@ -269,6 +309,9 @@
 }
 
 </string>
+        </property>
+        <property name="maxLength">
+         <number>320</number>
         </property>
        </widget>
       </item>
@@ -303,6 +346,12 @@
 
 </string>
         </property>
+        <property name="maxLength">
+         <number>64</number>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
        </widget>
       </item>
       <item row="3" column="0">
@@ -336,6 +385,12 @@
 
 </string>
         </property>
+        <property name="maxLength">
+         <number>64</number>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
@@ -358,6 +413,46 @@
      </property>
      <property name="text">
       <string>Create Account</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="gui_CreateWarningLabel">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>160</y>
+       <width>321</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="gui_resetPassword">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <attribute name="title">
+     <string>Reset Password</string>
+    </attribute>
+    <widget class="QToolButton" name="gui_resetResetPassword">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>70</y>
+       <width>221</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="text">
+      <string>Click Here to reset password:</string>
      </property>
     </widget>
    </widget>

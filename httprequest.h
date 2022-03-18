@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include "stringrequest.h"
@@ -12,19 +11,46 @@ namespace net{
         databaseDown,
         unknownResponse,
     };
+    enum class HTTPRegisterResponses
+    {
+        registerSuccess,
+        invalidPasswordLength,
+        emailRegistered,
+        registerFailure,
+        invalidEmail
+    };
+    enum class HTTPResetResponses
+    {
+        resetSuccess,
+        databaseDown,
+        invalidPasswordLength,
+        usernameNotFound,
+        wrongPassword
+    };
+    enum class HTTPLicenseResponse
+    {
+        databaseDown,
+        license_none,
+        license_standard,
+        license_premium
+    };
+
     HTTPResponses mapIntToEnum(int value);
+    HTTPRegisterResponses createMapIntToEnum(int value);
+    HTTPResetResponses resetMapIntToEnum(int value);
+    HTTPLicenseResponse licenseMapIntToEnum(int value);
     int parseResponse(std::string inputStr);
 }
 
 namespace net
 {
-class HTTPRequest {
+class HTTPRequest { //abstract HTTPRequest Class.
 protected:
     std::thread threadContext;
     asio::error_code ec;
     asio::io_context context;
     std::unique_ptr<asio::io_context::work> idleWork;
-    std::unique_ptr<asio::ip::tcp::socket> socket; // replace raw pointers with unique_ptrs
+    std::unique_ptr<asio::ip::tcp::socket> socket;
     asio::ip::tcp::endpoint socketEndpoint;
 
 public:
@@ -33,6 +59,10 @@ public:
 public:
     void initialiseEndpoint(StringRequest req, std::string service);
     void initialiseEndpoint(std::string ipAddress, std::string service);
+    virtual void grabdata() = 0;
+    virtual void connectAndSend(StringRequest req) = 0;
+    virtual void closeConnection() = 0;
+    virtual std::string returnResponse() = 0;
 };
 
 class Session : public HTTPRequest

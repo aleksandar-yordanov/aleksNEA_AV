@@ -10,6 +10,7 @@ HTTPRequest::HTTPRequest()
     this->threadContext = std::thread([&](){context.run();});
     this->socket = std::make_unique<asio::ip::tcp::socket>(this->context);
 }
+
 HTTPRequest::~HTTPRequest()
 {
     this->context.stop();
@@ -24,6 +25,7 @@ void HTTPRequest::initialiseEndpoint(StringRequest req, std::string service)
 
     this->socketEndpoint = iter->endpoint();
 }
+
 void HTTPRequest::initialiseEndpoint(std::string ipAddress, std::string service)
 {
     asio::ip::tcp::resolver resolver(this->context);
@@ -40,8 +42,8 @@ void Session::grabdata()
         {
             if(!ec){
                 std::cout << "\nRead " << length << " bytes\n";
-                for(int i =0; i < length; i++){
-                    std::cout << vBuffer[i];
+                for(int i = 0; i < static_cast<int>(length); i++){
+                    //std::cout << vBuffer[i];
                     this->response.push_back(vBuffer[i]);
                 }
                 grabdata();
@@ -108,6 +110,31 @@ void Session::closeConnection()
     this->socket->close(this->ec);
 }
 
+HTTPRegisterResponses net::createMapIntToEnum(int value)
+{
+    switch(value)
+    {
+        case 0:
+            return net::HTTPRegisterResponses::registerFailure;
+            break;
+        case 1:
+            return net::HTTPRegisterResponses::registerSuccess;
+            break;
+        case 2:
+            return net::HTTPRegisterResponses::invalidPasswordLength;
+            break;
+        case 3:
+            return net::HTTPRegisterResponses::emailRegistered;
+            break;
+        case 4:
+            return net::HTTPRegisterResponses::invalidEmail;
+            break;
+        default:
+            return net::HTTPRegisterResponses::registerFailure;
+            break;
+    }
+}
+
 HTTPResponses net::mapIntToEnum(int value)
 {
     switch(value)
@@ -130,14 +157,60 @@ HTTPResponses net::mapIntToEnum(int value)
     }
 }
 
+HTTPResetResponses net::resetMapIntToEnum(int value)
+{
+    switch(value)
+    {
+        case 0:
+            return net::HTTPResetResponses::databaseDown;
+            break;
+        case 1:
+            return net::HTTPResetResponses::resetSuccess;
+            break;
+        case 2:
+            return net::HTTPResetResponses::invalidPasswordLength;
+            break;
+        case 3:
+            return net::HTTPResetResponses::usernameNotFound;
+            break;
+        case 4:
+            return net::HTTPResetResponses::wrongPassword;
+            break;
+        default:
+            return net::HTTPResetResponses::databaseDown;
+            break;
+    }
+}
+
+HTTPLicenseResponse net::licenseMapIntToEnum(int value)
+{
+    switch(value)
+    {
+    case 0:
+        return net::HTTPLicenseResponse::databaseDown;
+        break;
+    case 1:
+        return net::HTTPLicenseResponse::license_none;
+        break;
+    case 2:
+        return net::HTTPLicenseResponse::license_standard;
+        break;
+    case 3:
+        return net::HTTPLicenseResponse::license_premium;
+        break;
+    default:
+        return net::HTTPLicenseResponse::databaseDown;
+        break;
+    }
+}
+
 int net::parseResponse(std::string inputStr)
 {
-
     int initPos = inputStr.find("$");
     std::string curStr = "";
-    if(initPos != std::string::npos)
+    if(initPos != static_cast<int>(std::string::npos))
     {
-        for(int i = 1; i < (inputStr.length()-1)-initPos;i++)
+        for(unsigned long i = 1; i < (inputStr.length()-1)-initPos;i++)
         {
             if(inputStr[initPos+i] == '?'){
                 break;
@@ -152,6 +225,4 @@ int net::parseResponse(std::string inputStr)
     } catch (std::invalid_argument) {
         return std::stoi("3");
     }
-    //std::cout << curStr << " debug" <<std::endl;
 }
-

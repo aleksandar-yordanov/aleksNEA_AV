@@ -3,7 +3,7 @@
 #include "mainwindow.h"
 #include "loginwindow.h"
 #include "resetwindow.h"
-#include "logintransfer.h"
+#include "loginmanager.h"
 #include "httprequest.h"
 
 loginTransfer mainTransfer; //extern in mainInherited.h
@@ -11,19 +11,19 @@ loginTransfer mainTransfer; //extern in mainInherited.h
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow* mainWindow = new MainWindow;
-    loginWindow* login = new loginWindow;
-    resetWindow* reset = new resetWindow;
+    QPointer<MainWindow> mainWindow = new MainWindow;
+    QPointer<loginWindow> login = new loginWindow;
+    QPointer<resetWindow> reset = new resetWindow;
     mainTransfer.setChildWindows(mainWindow, login, reset);
     return a.exec();
 }
 
-void sendEvent(int state, loginTransfer transferObj) //ghetto callbacks
+void sendEvent(int state, loginTransfer transferObj)//retarded code, doesnt respect encapsulation heirarchy
 {
     if(state == 1)
     {
         net::HTTPResponses response = transferObj.doLogin();
-        switch (response)
+        switch (response) //enum comparison for login
         {
         case net::HTTPResponses::loginSuccess:
             transferObj.dodgyLoginTextSetter("Login Successful");

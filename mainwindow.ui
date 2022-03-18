@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Aleks AV</string>
   </property>
   <property name="toolTip">
    <string/>
@@ -42,49 +42,16 @@
      <attribute name="title">
       <string>Scanning</string>
      </attribute>
-     <widget class="QLabel" name="testUser">
-      <property name="geometry">
-       <rect>
-        <x>680</x>
-        <y>280</y>
-        <width>60</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="testPass">
-      <property name="geometry">
-       <rect>
-        <x>680</x>
-        <y>300</y>
-        <width>60</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
      <widget class="QWidget" name="horizontalLayoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>0</y>
-        <width>661</width>
+        <width>741</width>
         <height>321</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QPushButton" name="gui_startScan">
-         <property name="text">
-          <string>Start Scan</string>
-         </property>
-        </widget>
-       </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
@@ -95,12 +62,43 @@
           </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="gui_threatList"/>
+          <widget class="QTableView" name="gui_ThreatTable"/>
          </item>
          <item>
           <widget class="QProgressBar" name="gui_scanProgress">
            <property name="value">
             <number>24</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="gui_startScan">
+           <property name="text">
+            <string>Start Scan</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="gui_deleteThreat">
+           <property name="text">
+            <string>Delete</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="gui_quarantineThreat">
+           <property name="text">
+            <string>Quarantine</string>
            </property>
           </widget>
          </item>
@@ -165,6 +163,19 @@
        <string>Directory Scan</string>
       </property>
      </widget>
+     <widget class="QLabel" name="gui_ads">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>240</y>
+        <width>511</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="gui_tabStatistics">
      <property name="enabled">
@@ -184,7 +195,10 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QChartView" name="graphicsView"/>
+        <widget class="QChartView" name="gui_scanAverage"/>
+       </item>
+       <item>
+        <widget class="QChartView" name="gui_scanDangerousAverage"/>
        </item>
       </layout>
      </widget>
@@ -197,23 +211,23 @@
      <x>0</x>
      <y>0</y>
      <width>769</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAccount_Details">
     <property name="title">
      <string>Account Details</string>
     </property>
-    <addaction name="actionEdit_Details_2"/>
+    <addaction name="actionEdit_Details"/>
    </widget>
    <addaction name="menuAccount_Details"/>
   </widget>
-  <action name="actionEdit_Details">
+  <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
    </property>
   </action>
-  <action name="actionEdit_Details_2">
+  <action name="actionEdit_Details">
    <property name="text">
     <string>Edit Details</string>
    </property>
